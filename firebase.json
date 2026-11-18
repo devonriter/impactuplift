@@ -14,7 +14,44 @@
     "headers": [
       {
         "source": "**",
-        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/fundraiser",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/fundraiser/**",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/resources",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/resources/**",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/client-checkin",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/client-checkin/**",
+        "destination": "/",
+        "type": 301
       }
     ]
   }

@@ -3,7 +3,7 @@
 # Run from a fresh checkout of main, never from the folder the builder worked in.
 #
 # Needs: ISSUE_NUMBER, ISSUE_TITLE, BRANCH, GH_TOKEN, GITHUB_OUTPUT.
-# Sets these step outputs only when it pushed to main: published=true, folder=<folder>.
+# Sets this step output only when it pushed to main: published=true.
 #
 # Exits 0 without publishing when the run pushed nothing, or when the safety
 # guard stopped it. Any other failure exits non-zero, and the workflow tells the team.
@@ -16,16 +16,20 @@ stop_for_teacher() {
 }
 
 # Prints the problem and returns 1 if the listed changes are not safe to publish.
-# git quotes a path with unusual characters, and a quoted path fails the folder
-# check, so an odd filename stops the publish rather than slipping past it.
+# The whole site is the app, so a build may change any site file. It may never
+# change the machinery: the workflows and scripts (which hold the deploy secret),
+# the builder's own instructions, the hosting config, or build.json (this script
+# writes it). git quotes a path with unusual characters, and a quoted path fails
+# the check, so an odd filename stops the publish rather than slipping past it.
 check_changes() {
   local raw=$1 outside=0 meta path mode
   while IFS=$'\t' read -r meta path; do
     [ -n "$meta" ] || continue
     mode=$(echo "$meta" | cut -d' ' -f2)
     case "$path" in
-      "$FOLDER"/*) ;;
-      *) echo "Outside $FOLDER/: $path"; outside=1 ;;
+      .github/*|CLAUDE.md|firebase.json|.firebaserc|build.json|\"*)
+        echo "Protected file: $path"; outside=1 ;;
+      .*|*/.*) echo "Hidden file: $path"; outside=1 ;;
     esac
     case "$mode" in
       120000|160000) echo "Link or submodule: $path"; outside=1 ;;
@@ -48,14 +52,6 @@ if ! git ls-remote --exit-code --heads origin "refs/heads/$BRANCH" > /dev/null; 
   exit 0
 fi
 
-# Which project is this? The issue title's [Project] prefix decides (table in CLAUDE.md).
-case "$ISSUE_TITLE" in
-  "[Fundraiser]"*)          FOLDER=fundraiser ;;
-  "[Resource Website]"*)    FOLDER=resources ;;
-  "[Client Check-in App]"*) FOLDER=client-checkin ;;
-  *) stop_for_teacher "title has no known project prefix" "The request's title does not start with one of our three projects." ;;
-esac
-
 case "$BRANCH" in
   "claude/issue-$ISSUE_NUMBER-"*) ;;
   *) stop_for_teacher "unexpected branch $BRANCH" "The build landed somewhere unexpected." ;;
@@ -69,10 +65,10 @@ if [ -z "$changes" ]; then
   exit 0
 fi
 
-# b. Safety guard. Students' text drives the builder, so a build may only ever
-# change its own project's folder.
+# b. Safety guard. Students' text drives the builder, so a build may change the
+# site but never the files that build and deploy it.
 if ! check_changes "$changes"; then
-  stop_for_teacher "branch $BRANCH failed the safety guard" "It changed something outside the $FOLDER folder, which a build is not allowed to do. The work is saved on the branch $BRANCH."
+  stop_for_teacher "branch $BRANCH failed the safety guard" "It changed one of the files that run the builder, which a build is not allowed to do. The work is saved on the branch $BRANCH."
 fi
 
 git config user.name "github-actions[bot]"
@@ -92,16 +88,15 @@ for attempt in 1 2; do
   # Check what would actually land, not only what the branch claimed to change.
   if ! check_changes "$(raw_diff --cached origin/main)"; then
     git merge --abort || true
-    stop_for_teacher "merge of $BRANCH failed the safety guard" "It changed something outside the $FOLDER folder, which a build is not allowed to do. The work is saved on the branch $BRANCH."
+    stop_for_teacher "merge of $BRANCH failed the safety guard" "It changed one of the files that run the builder, which a build is not allowed to do. The work is saved on the branch $BRANCH."
   fi
 
-  printf '{"build": %d, "builtAt": "%s"}\n' "$ISSUE_NUMBER" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$FOLDER/build.json"
-  git add "$FOLDER/build.json"
-  git commit --quiet --no-verify -m "Publish build #$ISSUE_NUMBER to /$FOLDER/"
+  printf '{"build": %d, "builtAt": "%s"}\n' "$ISSUE_NUMBER" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > build.json
+  git add build.json
+  git commit --quiet --no-verify -m "Publish build #$ISSUE_NUMBER"
 
   if git push --quiet origin HEAD:refs/heads/main; then
     echo "published=true" >> "$GITHUB_OUTPUT"
-    echo "folder=$FOLDER" >> "$GITHUB_OUTPUT"
     echo "Merged $BRANCH into main."
     exit 0
   fi

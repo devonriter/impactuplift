@@ -1,14 +1,14 @@
 name: Claude builder
 
 # A Feature Request from the Crew Build Request form becomes an issue labeled "build".
-# An answer to a question the builder asked becomes an @claude comment on that issue.
+# The builder never asks questions: nobody watches the issues, so it decides and says what it chose.
 # Only people with write access to this repo (Devon, and the form's script acting as Devon)
 # can apply labels or trigger @claude, so a stranger on this public repo cannot start a build.
 #
 # Students' text drives the builder, so the two jobs below are kept apart on purpose.
 # The "build" job never sees the Firebase secret. The "publish" job runs on a fresh
-# machine, starts from main, and merges a branch only if it stays inside the issue's
-# own project folder.
+# machine, starts from main, and merges a branch only if it leaves the builder's own
+# files alone (see .github/scripts/publish-build.sh).
 
 on:
   issues:
@@ -93,11 +93,10 @@ jobs:
         if: steps.deploy.outcome == 'success'
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          FOLDER: ${{ steps.publish.outputs.folder }}
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh issue comment "$ISSUE_NUMBER" --body "Live now: https://crew-solve-for-tomorrow.web.app/$FOLDER/ (Build #$ISSUE_NUMBER). Refresh and check the footer says Build #$ISSUE_NUMBER."
+          gh issue comment "$ISSUE_NUMBER" --body "Live now: https://crew-solve-for-tomorrow.web.app/ (Build #$ISSUE_NUMBER). Refresh and check the footer says Build #$ISSUE_NUMBER."
           gh issue close "$ISSUE_NUMBER"
 
       - name: Tell the team it did not publish

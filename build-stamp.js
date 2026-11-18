@@ -1,8 +1,8 @@
-// Shows "Build #N, built 11:35 AM" at the bottom of a project page, so a team
-// can tell their new version is up. The publish step writes build.json into the
-// project's folder. With no build.json, this shows nothing.
+// Shows "Build #N, built 11:35 AM" at the bottom of every page, so the team
+// can tell their new version is up. The publish step writes build.json at the
+// site root. With no build.json, this shows nothing.
 (function () {
-  fetch("./build.json", { cache: "no-store" })
+  fetch("/build.json", { cache: "no-store" })
     .then(function (response) {
       return response.ok ? response.json() : null;
     })

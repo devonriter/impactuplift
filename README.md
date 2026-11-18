@@ -1,6 +1,6 @@
 # Riter CREW: Solve for Tomorrow
 
-Our CREW's 2026-27 project: technology that helps people in Detroit get jobs, built with our partners Better Way Detroit and Detroit Rescue Mission Ministries, and entered in Samsung Solve for Tomorrow.
+Our CREW's 2026-27 project: a web app that helps students at suburban schools run fundraisers for our Detroit partners, Better Way Detroit and Detroit Rescue Mission Ministries. Entered in Samsung Solve for Tomorrow, and run as an open-source community benefit project at https://impactuplift.org.
 
 ## How we build
 
@@ -10,10 +10,6 @@ Our CREW's 2026-27 project: technology that helps people in Detroit get jobs, bu
 4. **Test.** We open the link on our Chromebooks, check that the footer shows our build number, and check it against our request.
 5. **Fix.** If something is wrong, we send a new Feature Request saying what to fix, and it publishes the same way.
 
-Live site: https://crew-solve-for-tomorrow.web.app
-
-- Fundraiser: https://crew-solve-for-tomorrow.web.app/fundraiser/
-- Resource Website: https://crew-solve-for-tomorrow.web.app/resources/
-- Client Check-in App: https://crew-solve-for-tomorrow.web.app/client-checkin/
+Live site: https://impactuplift.org (also https://crew-solve-for-tomorrow.web.app). The whole site is the app.
 
 Rules: no real client information, first names only, and everything here may be public.
