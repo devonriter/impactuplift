@@ -98,6 +98,9 @@ for attempt in 1 2; do
   if git push --quiet origin HEAD:refs/heads/main; then
     echo "published=true" >> "$GITHUB_OUTPUT"
     echo "Merged $BRANCH into main."
+    # The build is in main now, so its branch is no longer needed. A branch that
+    # was held for Mr. Riter never reaches this line and is kept.
+    git push --quiet origin --delete "$BRANCH" || echo "Could not delete branch $BRANCH."
     exit 0
   fi
   echo "Push to main failed on attempt $attempt."
