@@ -3,285 +3,299 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Detroit Donation Match | Riter CREW</title>
+<title>Fundraiser Hub | Riter CREW</title>
 <style>
   * { box-sizing: border-box; }
-  body { font-family: system-ui, sans-serif; margin: 0; padding: 16px; max-width: 760px; margin-inline: auto; line-height: 1.5; color: #1a1a1a; background: #fff; font-size: 1.05rem; }
-  h1 { font-size: 1.7rem; margin: 0.25rem 0; }
-  h2 { font-size: 1.3rem; margin-top: 1.5rem; }
-  a { color: #1d4ed8; }
-  .tag { color: #555; margin-top: 0; }
-  .notice { background: #fff7d6; border: 2px solid #c9a100; padding: 10px 12px; border-radius: 8px; margin: 12px 0; font-size: 0.95rem; }
-  nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-  nav button, button, .btn { min-height: 48px; padding: 8px 16px; font-size: 1rem; border-radius: 8px; border: 2px solid #1d4ed8; background: #fff; color: #1d4ed8; cursor: pointer; font-family: inherit; }
-  nav button[aria-current="true"], button.primary { background: #1d4ed8; color: #fff; }
-  button.danger { border-color: #b91c1c; color: #b91c1c; }
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 16px; max-width: 760px; margin-inline: auto; line-height: 1.5; color: #12263a; background: #f2fbf7; font-size: 1.05rem; }
+  h1 { font-size: 1.8rem; margin: 0.25rem 0; color: #0b4f8a; }
+  h2 { font-size: 1.35rem; margin: 0.5rem 0; color: #0b4f8a; }
+  h3 { margin: 0 0 4px; font-size: 1.1rem; }
+  a { color: #0b5cad; }
+  .notice { background: #e8f4ff; border: 2px solid #0b5cad; padding: 10px 12px; border-radius: 8px; margin: 12px 0; font-size: 0.95rem; }
+  button, .btn { min-height: 48px; padding: 8px 18px; font-size: 1rem; border-radius: 8px; border: 2px solid #0b5cad; background: #fff; color: #0b5cad; cursor: pointer; font-family: inherit; }
+  button.primary { background: #0b5cad; color: #fff; }
+  button.green { background: #15803d; border-color: #15803d; color: #fff; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
   button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
-  .card { border: 2px solid #ccc; border-radius: 10px; padding: 12px; margin: 12px 0; }
-  .card h3 { margin: 0 0 4px; font-size: 1.15rem; }
-  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
-  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.9rem; font-weight: 600; border: 2px solid; }
-  .Needed { color: #b91c1c; border-color: #b91c1c; }
-  .Partially { color: #92400e; border-color: #92400e; }
-  .Fulfilled { color: #166534; border-color: #166534; }
-  .High { background: #fee2e2; } .Medium { background: #fef3c7; } .Low { background: #e5e7eb; }
-  .bar { background: #e5e7eb; border-radius: 6px; height: 14px; overflow: hidden; margin-top: 6px; }
-  .bar span { display: block; height: 100%; background: #166534; }
+  .big { display: block; width: 100%; min-height: 80px; font-size: 1.8rem; font-weight: 800; letter-spacing: .04em; margin: 20px 0; border-radius: 14px; background: linear-gradient(135deg,#15803d,#0b5cad); color: #fff; border: 0; }
+  .card { background: #fff; border: 2px solid #b6d9c9; border-radius: 12px; padding: 12px 14px; margin: 12px 0; }
+  .card.sel { border-color: #0b5cad; box-shadow: 0 0 0 3px #bfdcf7; }
+  .card p { margin: 4px 0; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; justify-content: space-between; }
+  ol.steps { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; padding: 0; margin: 12px 0; }
+  ol.steps li button { width: 100%; min-height: 56px; padding: 4px; font-size: .8rem; line-height: 1.2; border-width: 2px; }
+  ol.steps li button[aria-current="step"] { background: #0b5cad; color: #fff; }
+  ol.steps li button.done { border-color: #15803d; color: #15803d; }
+  ol.steps li button.done[aria-current="step"] { color: #fff; }
+  .progress { background: #d9e8e1; border-radius: 6px; height: 12px; overflow: hidden; }
+  .progress span { display: block; height: 100%; background: #15803d; }
   label { display: block; font-weight: 600; margin-top: 12px; }
-  input, select, textarea { width: 100%; min-height: 48px; padding: 8px; font-size: 1rem; font-family: inherit; border: 2px solid #555; border-radius: 8px; }
-  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+  input, select, textarea { width: 100%; min-height: 48px; padding: 8px; font-size: 1rem; font-family: inherit; border: 2px solid #5b7185; border-radius: 8px; background: #fff; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; background: #fff; border: 2px solid #b6d9c9; border-radius: 10px; padding: 10px; }
   .check input { width: 28px; min-height: 28px; flex: none; }
-  .cols { display: grid; gap: 12px; grid-template-columns: 1fr; }
-  @media (min-width: 600px) { .cols { grid-template-columns: repeat(3, 1fr); } }
-  .col { border: 2px solid #ccc; border-radius: 10px; padding: 8px 12px; }
-  .col h3 { margin: 4px 0; }
-  .small { font-size: 0.9rem; color: #444; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .9rem; font-weight: 700; border: 2px solid; }
+  .pending { color: #92400e; border-color: #92400e; background: #fef3c7; }
+  .approved { color: #166534; border-color: #166534; background: #dcfce7; }
   .msg { font-weight: 600; color: #166534; }
+  .badges { display: grid; gap: 8px; grid-template-columns: 1fr; }
+  @media (min-width: 600px) { .badges { grid-template-columns: 1fr 1fr; } }
+  .badge { border: 2px dashed #9aa9b5; border-radius: 12px; padding: 10px; background: #f3f5f7; color: #5b6b78; }
+  .badge.on { border: 2px solid #15803d; background: #dcfce7; color: #12263a; }
+  .points { font-size: 2.2rem; font-weight: 800; color: #15803d; }
+  .small { font-size: .9rem; color: #3f5468; }
+  .demo { border: 2px dashed #0b5cad; border-radius: 10px; padding: 10px; margin: 12px 0; background: #eef6ff; }
 </style>
 </head>
 <body>
   <p><a href="/">Riter CREW</a></p>
-  <h1>Detroit Donation Match</h1>
-  <p class="tag">Nonprofits say exactly what they need. Businesses offer to help. Nonprofit staff decide.</p>
-
+  <h1>Fundraiser Hub</h1>
   <div class="notice" role="note">
-    <strong>Practice version.</strong> Every request, business and offer here is <strong>invented</strong> to test the idea.
-    No real business or nonprofit has agreed to take part. Nothing is sent anywhere and no money is collected.
-    Please do not type real names, phone numbers, emails or addresses. Changes stay in your own browser only.
+    <strong>Practice version.</strong> Everything here is sample information. No money is collected, nothing is sent
+    to anyone, and progress is saved only in this browser. Please do not type real phone numbers, emails, addresses or last names.
   </div>
-
-  <nav aria-label="Sections" id="nav"></nav>
-  <main id="view" tabindex="-1"></main>
+  <div id="app"></div>
 
 <script>
 (function () {
-  var KEY = 'donationMatchDemo.v1';
-  var CATS = ['Prepared lunches', 'Groceries', 'Hygiene kits', 'Clothing', 'Other'];
-  var STATUSES = ['Needed', 'Partially Fulfilled', 'Fulfilled'];
-  var PRIORITIES = ['High', 'Medium', 'Low'];
-  var NONPROFITS = ['Sample Nonprofit A (practice)', 'Sample Nonprofit B (practice)'];
-  var TABS = [['needs', 'Needs Board'], ['new', 'Add a Need'], ['offer', 'Offer to Donate'], ['review', 'Review Offers'], ['progress', 'Progress']];
+  var KEY = 'fundraiserHub.v1';
+  var STEPS = ['Choose a partner', 'Choose a fundraiser', 'Plan it', 'Run it', 'Points & report'];
 
-  function seed() {
-    return {
-      nextId: 5,
-      requests: [
-        { id: 1, nonprofit: NONPROFITS[0], category: 'Prepared lunches', item: 'Bagged lunches', qty: 150, received: 0, date: '2026-12-01', priority: 'High', status: 'Needed', notes: 'Packed lunches for a weekend meal program. Needs to be kept cold.' },
-        { id: 2, nonprofit: NONPROFITS[1], category: 'Groceries', item: 'Canned vegetables and rice', qty: 80, received: 30, date: '2026-12-10', priority: 'Medium', status: 'Partially Fulfilled', notes: 'Unopened, unexpired cans and sealed bags only.' },
-        { id: 3, nonprofit: NONPROFITS[0], category: 'Hygiene kits', item: 'Hygiene kits (soap, toothbrush, toothpaste)', qty: 60, received: 60, date: '2026-11-20', priority: 'Low', status: 'Fulfilled', notes: 'New, sealed items only.' },
-        { id: 4, nonprofit: NONPROFITS[1], category: 'Clothing', item: 'Warm winter coats and socks', qty: 40, received: 0, date: '2026-12-15', priority: 'High', status: 'Needed', notes: 'Clean, good condition, adult sizes.' }
-      ],
-      offers: [
-        { id: 1, requestId: 1, business: 'Sample Cafe (practice)', item: 'Turkey sandwich lunches', qty: 50, availability: 'Weekdays after 2 pm', details: 'Made this morning, kept in a cooler.', food: true, foodTemp: 'Kept cold at 40°F or below', foodMade: 'Made today', status: 'Pending', foodChecked: false }
-      ]
-    };
+  var PARTNERS = [
+    { id: 'bwd', name: 'Better Way Detroit', text: 'Helps Detroiters with job training, work readiness and support to find steady work.', needs: 'Needs: job-readiness supplies, interview clothing, community support.' },
+    { id: 'drmm', name: 'Detroit Rescue Mission Ministries', text: 'Provides meals, shelter, recovery programs and support for people facing homelessness and addiction.', needs: 'Needs: food, hygiene kits, clothing, blankets, program support.' }
+  ];
+  var IDEAS = [
+    { id: 'bake', name: 'Bake sale', text: 'Sell baked goods at school or a community event.', mats: 'Baked goods, tables, signs, price list, cash box (teacher-held), napkins and bags.' },
+    { id: 'car', name: 'Car wash', text: 'Wash cars for donations from the community.', mats: 'Buckets, sponges, towels, hoses, soap, signs, water access.' },
+    { id: 'drive', name: 'Clothing or supply donation drive', text: 'Collect items the partner needs, such as clothes or hygiene kits.', mats: 'Collection bins, flyers, a list of wanted items, a sorting table.' },
+    { id: 'sports', name: 'Sports tournament', text: 'Host a game or tournament where entry or a donation helps the partner.', mats: 'Space, balls and equipment, sign-up sheet, scoreboard, referees.' },
+    { id: 'event', name: 'School fundraising event', text: 'A talent show, spirit night or similar event.', mats: 'Space, sound equipment, performers, tickets or sign-in sheet, posters.' },
+    { id: 'custom', name: 'Custom fundraiser idea', text: 'Have your own idea? Describe it in the plan.', mats: 'You decide. List what you need in the plan.' }
+  ];
+  var TASKS = [
+    'Get teacher approval.',
+    'Confirm the location and date.',
+    'Assign responsibilities.',
+    'Gather materials.',
+    'Promote the fundraiser.',
+    'Hold the event.',
+    'Record fundraising results.'
+  ];
+  var PLAN_FIELDS = [
+    ['name', 'Fundraiser name', 'text'], ['goal', 'Fundraising goal (example: $200 or 50 cans)', 'text'],
+    ['date', 'Date', 'date'], ['location', 'Location', 'text'],
+    ['team', 'Team members (first names) and responsibilities', 'textarea'],
+    ['materials', 'Materials needed', 'textarea'], ['promo', 'Promotion plan', 'textarea']
+  ];
+  var REPORT_FIELDS = [
+    ['name', 'Fundraiser name', 'text'], ['partner', 'Selected partner', 'text'], ['date', 'Date completed', 'date'],
+    ['amount', 'Amount raised or supplies collected', 'text'], ['people', 'Number of participants', 'number'],
+    ['well', 'What went well', 'textarea'], ['learned', 'What we learned', 'textarea']
+  ];
+  var MESSAGES = [
+    'You are about to do something great for Detroit!',
+    'Nice choice. Every community helper starts here.',
+    'Good planning makes a great fundraiser.',
+    'You are doing it. Take it one task at a time.',
+    'Look at what you did. Thank you for helping.'
+  ];
+
+  var state = load();
+  function fresh() {
+    return { started: false, step: 0, partner: '', idea: '', plan: {}, tasks: [], approved: false, submitted: false, report: {} };
   }
-
-  var state;
-  try { state = JSON.parse(localStorage.getItem(KEY)); } catch (e) { state = null; }
-  if (!state || !state.requests) state = seed();
-  var tab = 'needs', selected = null, flash = '';
-
+  function load() {
+    try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === 'object') return Object.assign(fresh(), s); } catch (e) {}
+    return fresh();
+  }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
 
-  // Build elements safely (no innerHTML with user text).
+  var app = document.getElementById('app');
   function h(tag, attrs, kids) {
     var el = document.createElement(tag);
-    for (var k in (attrs || {})) {
-      if (k === 'onclick' || k === 'onchange' || k === 'onsubmit') el[k] = attrs[k];
-      else if (k === 'text') el.textContent = attrs[k];
-      else if (attrs[k] !== false && attrs[k] !== null) el.setAttribute(k, attrs[k] === true ? '' : attrs[k]);
-    }
-    (kids || []).forEach(function (c) { if (c !== null && c !== undefined) el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === 'text') el.textContent = attrs[k];
+      else if (k.indexOf('on') === 0) el.addEventListener(k.slice(2), attrs[k]);
+      else if (attrs[k] === true) el.setAttribute(k, '');
+      else if (attrs[k] !== false && attrs[k] != null) el.setAttribute(k, attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c) el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
     return el;
   }
-  function byId(id) { return state.requests.filter(function (r) { return r.id === id; })[0]; }
-  function statusClass(s) { return s === 'Partially Fulfilled' ? 'Partially' : s; }
-  function pill(text, cls) { return h('span', { class: 'pill ' + cls, text: text }); }
-  function bar(r) {
-    var pct = Math.min(100, Math.round(r.received / r.qty * 100));
-    return h('div', {}, [
-      h('div', { class: 'bar', role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': pct, 'aria-label': r.item + ' progress' }, [h('span', { style: 'width:' + pct + '%' })]),
-      h('div', { class: 'small', text: r.received + ' of ' + r.qty + ' received (' + pct + '%)' })
-    ]);
+  function find(list, id) { return list.filter(function (x) { return x.id === id; })[0]; }
+  function taskDone(i) { return !!state.tasks[i]; }
+  function planDone() {
+    return ['name', 'goal', 'date', 'location', 'team', 'materials', 'promo'].every(function (k) { return (state.plan[k] || '').trim(); });
   }
-  function field(label, input, id) {
-    return [h('label', { for: id, text: label }), input];
-  }
-  function goTo(t, id) { tab = t; selected = id || null; render(); document.getElementById('view').focus(); }
+  // A task counts only if teacher approval is in place (task 0 is approval itself).
+  function canTick(i) { return i === 0 ? false : state.approved; }
 
-  function requestCard(r, detailed) {
-    var kids = [
-      h('h3', { text: r.item }),
-      h('div', { class: 'small', text: r.nonprofit + ' · ' + r.category }),
-      h('div', { class: 'row' }, [pill(r.priority + ' priority', r.priority), pill(r.status, statusClass(r.status))]),
-      h('p', { text: 'Needs ' + r.qty + ' by ' + r.date + '.' }),
-      bar(r)
+  function points() {
+    var items = [
+      ['Chose a community partner', 10, !!state.partner],
+      ['Completed the fundraiser plan', 20, planDone()],
+      ['Received teacher approval', 20, state.approved],
+      ['Completed preparation tasks', 20, state.approved && [1, 2, 3, 4].every(taskDone)],
+      ['Held the fundraiser', 20, state.approved && taskDone(5)],
+      ['Submitted a final report', 30, state.submitted]
     ];
-    if (detailed) kids.push(h('p', { text: 'Notes: ' + (r.notes || 'None') }));
-    else kids.push(h('div', { class: 'row' }, [h('button', { onclick: function () { goTo('details', r.id); }, text: 'See details' })]));
-    return h('div', { class: 'card' }, kids);
+    var total = items.reduce(function (n, i) { return n + (i[2] ? i[1] : 0); }, 0);
+    return { items: items, total: total };
+  }
+  function badges() {
+    var p = points().items;
+    return [
+      ['Community Starter', 'Choose a community partner.', p[0][2]],
+      ['Fundraiser Planner', 'Finish your fundraiser plan.', p[1][2]],
+      ['Team Player', 'Get approval and finish the preparation tasks.', p[2][2] && p[3][2]],
+      ['Community Champion', 'Hold the fundraiser and submit your report.', p[4][2] && p[5][2]]
+    ];
   }
 
-  function viewNeeds() {
-    var root = h('div', {}, [h('h2', { text: 'Donation Needs Board' })]);
-    state.requests.forEach(function (r) { root.appendChild(requestCard(r)); });
-    return root;
-  }
+  function go(n) { state.step = Math.max(0, Math.min(4, n)); save(); render(); document.getElementById('app').focus(); }
 
-  function viewDetails() {
-    var r = byId(selected);
-    if (!r) return viewNeeds();
-    var offers = state.offers.filter(function (o) { return o.requestId === r.id; });
-    var root = h('div', {}, [
-      h('button', { onclick: function () { goTo('needs'); }, text: '← Back to board' }),
-      h('h2', { text: 'Donation Request Details' }),
-      requestCard(r, true),
-      h('div', { class: 'row' }, [h('button', { class: 'primary', onclick: function () { goTo('offer', r.id); }, text: 'Offer to help with this' })]),
-      h('h2', { text: 'Offers for this request' })
-    ]);
-    if (!offers.length) root.appendChild(h('p', { text: 'No offers yet.' }));
-    offers.forEach(function (o) {
-      root.appendChild(h('div', { class: 'card' }, [h('strong', { text: o.business }), h('div', { text: o.qty + ' × ' + o.item + ' — ' + o.status })]));
+  function stepper() {
+    var ol = h('ol', { class: 'steps', 'aria-label': 'Five steps' });
+    STEPS.forEach(function (s, i) {
+      var done = [!!state.partner, !!state.idea, planDone(), state.approved && taskDone(6), state.submitted][i];
+      ol.appendChild(h('li', {}, [h('button', {
+        type: 'button', class: done ? 'done' : '', 'aria-current': i === state.step ? 'step' : false,
+        text: (i + 1) + '. ' + s + (done ? ' ✓' : ''), onclick: function () { go(i); }
+      })]));
     });
-    return root;
+    var pct = (state.step + 1) * 20;
+    return h('div', {}, [ol, h('div', { class: 'progress', role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': pct, 'aria-label': 'Progress' }, [h('span', { style: 'width:' + pct + '%' })]),
+      h('p', { class: 'msg', text: MESSAGES[state.step] })]);
+  }
+  function nav() {
+    var back = h('button', { type: 'button', text: '← Back', disabled: state.step === 0, onclick: function () { go(state.step - 1); } });
+    var next = h('button', { type: 'button', class: 'primary', text: 'Next →', disabled: state.step === 4, onclick: function () { go(state.step + 1); } });
+    return h('div', { class: 'row' }, [back, next]);
   }
 
-  function viewNew() {
-    var f = {};
-    f.np = h('select', { id: 'np' }, NONPROFITS.map(function (n) { return h('option', { text: n }); }));
-    f.cat = h('select', { id: 'cat' }, CATS.map(function (n) { return h('option', { text: n }); }));
-    f.item = h('input', { id: 'item', required: true, maxlength: 80 });
-    f.qty = h('input', { id: 'qty', type: 'number', min: 1, max: 100000, required: true });
-    f.date = h('input', { id: 'date', type: 'date', required: true });
-    f.pri = h('select', { id: 'pri' }, PRIORITIES.map(function (n) { return h('option', { text: n }); }));
-    f.notes = h('textarea', { id: 'notes', rows: 3, maxlength: 300 });
-    var form = h('form', { onsubmit: function (e) {
-      e.preventDefault();
-      state.requests.push({ id: state.nextId++, nonprofit: f.np.value, category: f.cat.value, item: f.item.value.trim(), qty: Math.max(1, parseInt(f.qty.value, 10) || 1), received: 0, date: f.date.value, priority: f.pri.value, status: 'Needed', notes: f.notes.value.trim() });
-      save(); flash = 'Sample request added to the board.'; goTo('needs');
-    } }, [].concat(
-      field('Nonprofit (practice)', f.np, 'np'), field('Type of item', f.cat, 'cat'),
-      field('What is needed', f.item, 'item'), field('How many', f.qty, 'qty'),
-      field('Date needed', f.date, 'date'), field('Priority', f.pri, 'pri'),
-      field('Notes (food handling, sizes, etc.)', f.notes, 'notes'),
-      [h('div', { class: 'row' }, [h('button', { class: 'primary', type: 'submit', text: 'Post sample request' })])]
-    ));
-    return h('div', {}, [h('h2', { text: 'Add a Sample Donation Need' }), form]);
-  }
-
-  function viewOffer() {
-    var f = {};
-    f.req = h('select', { id: 'req' }, state.requests.filter(function (r) { return r.status !== 'Fulfilled'; }).map(function (r) {
-      return h('option', { value: r.id, selected: r.id === selected, text: r.item + ' — ' + r.nonprofit });
-    }));
-    f.biz = h('input', { id: 'biz', required: true, maxlength: 60, placeholder: 'Invented name, e.g. Sample Bakery' });
-    f.item = h('input', { id: 'oitem', required: true, maxlength: 80 });
-    f.qty = h('input', { id: 'oqty', type: 'number', min: 1, max: 100000, required: true });
-    f.avail = h('input', { id: 'avail', required: true, maxlength: 100, placeholder: 'e.g. Weekdays after 2 pm' });
-    f.details = h('textarea', { id: 'odet', rows: 3, maxlength: 300 });
-    f.food = h('input', { id: 'food', type: 'checkbox' });
-    f.temp = h('input', { id: 'temp', maxlength: 100, placeholder: 'e.g. Kept cold, sealed packaging' });
-    f.made = h('input', { id: 'made', maxlength: 100, placeholder: 'e.g. Made today / expires Jan 5' });
-    var foodBox = h('div', { class: 'card', hidden: true }, [].concat(
-      [h('p', { class: 'small', text: 'Food is never accepted automatically. Nonprofit staff will check these details first.' })],
-      field('How is the food stored or kept safe?', f.temp, 'temp'), field('When was it made, or when does it expire?', f.made, 'made')));
-    f.food.onchange = function () { foodBox.hidden = !f.food.checked; };
-    var form = h('form', { onsubmit: function (e) {
-      e.preventDefault();
-      if (!f.req.value) return;
-      state.offers.push({ id: state.nextId++, requestId: parseInt(f.req.value, 10), business: f.biz.value.trim(), item: f.item.value.trim(), qty: Math.max(1, parseInt(f.qty.value, 10) || 1), availability: f.avail.value.trim(), details: f.details.value.trim(), food: f.food.checked, foodTemp: f.temp.value.trim(), foodMade: f.made.value.trim(), status: 'Pending', foodChecked: false });
-      save(); flash = 'Sample offer sent. It is Pending until nonprofit staff review it.'; goTo('review');
-    } }, [].concat(
-      field('Which need are you offering for?', f.req, 'req'), field('Business name (invented)', f.biz, 'biz'),
-      field('What you can give', f.item, 'oitem'), field('How many', f.qty, 'oqty'),
-      field('When it is available', f.avail, 'avail'), field('Other details', f.details, 'odet'),
-      [h('label', { class: 'check', for: 'food' }, [f.food, 'This offer includes food or meals']), foodBox,
-       h('div', { class: 'row' }, [h('button', { class: 'primary', type: 'submit', text: 'Submit sample offer' })])]
-    ));
-    return h('div', {}, [h('h2', { text: 'Business Donation Offer (practice)' }), h('p', { class: 'small', text: 'Do not enter real phone numbers, emails or addresses.' }), form]);
-  }
-
-  function setStatusFromQty(r) {
-    r.status = r.received >= r.qty ? 'Fulfilled' : (r.received > 0 ? 'Partially Fulfilled' : 'Needed');
-  }
-
-  function viewReview() {
-    var root = h('div', {}, [h('h2', { text: 'Nonprofit Review Dashboard' }),
-      h('p', { class: 'small', text: 'Staff decide on every offer. Nothing is approved automatically.' })]);
-    if (!state.offers.length) root.appendChild(h('p', { text: 'No offers yet.' }));
-    state.offers.forEach(function (o) {
-      var r = byId(o.requestId);
-      var kids = [
-        h('h3', { text: o.business }),
-        h('div', { text: 'Offers ' + o.qty + ' × ' + o.item }),
-        h('div', { class: 'small', text: 'For: ' + (r ? r.item + ' (' + r.nonprofit + ')' : 'removed request') }),
-        h('div', { class: 'small', text: 'Available: ' + o.availability }),
-        o.details ? h('div', { class: 'small', text: 'Details: ' + o.details }) : null,
-        h('div', { class: 'row' }, [pill(o.status, o.status === 'Accepted' ? 'Fulfilled' : o.status === 'Declined' ? 'Needed' : 'Partially')])
-      ];
-      if (o.food) {
-        kids.push(h('div', { class: 'notice' }, [
-          h('strong', { text: 'Food offer: safety check required. ' }),
-          'Storage: ' + (o.foodTemp || 'not given') + '. Made/expires: ' + (o.foodMade || 'not given') + '.']));
-      }
-      if (o.status === 'Pending') {
-        var chk = null, acc;
-        if (o.food) {
-          chk = h('input', { type: 'checkbox', id: 'fc' + o.id });
-          chk.onchange = function () { acc.disabled = !chk.checked; };
-          kids.push(h('label', { class: 'check', for: 'fc' + o.id }, [chk, 'Staff reviewed the food safety and handling details and they are acceptable.']));
-        }
-        acc = h('button', { class: 'primary', disabled: o.food, text: 'Accept', onclick: function () {
-          if (o.food && !chk.checked) return;
-          o.status = 'Accepted'; o.foodChecked = !!o.food;
-          if (r) { r.received = Math.min(r.qty, r.received + o.qty); setStatusFromQty(r); }
-          save(); flash = 'Offer accepted. The request was updated.'; render();
-        } });
-        kids.push(h('div', { class: 'row' }, [acc, h('button', { class: 'danger', text: 'Decline', onclick: function () { o.status = 'Declined'; save(); flash = 'Offer declined.'; render(); } })]));
-      }
-      root.appendChild(h('div', { class: 'card' }, kids));
+  function stepPartner() {
+    var box = h('div', {}, [h('h2', { text: 'Step 1: Choose a community partner' })]);
+    PARTNERS.forEach(function (p) {
+      var sel = state.partner === p.id;
+      box.appendChild(h('div', { class: 'card' + (sel ? ' sel' : '') }, [
+        h('h3', { text: p.name }), h('p', { text: p.text }), h('p', { class: 'small', text: p.needs }),
+        h('button', { type: 'button', class: sel ? 'green' : 'primary', 'aria-pressed': sel, text: sel ? 'Selected ✓' : 'Choose ' + p.name,
+          onclick: function () { state.partner = p.id; save(); render(); } })
+      ]));
     });
-    return root;
+    return box;
   }
-
-  function viewProgress() {
-    var root = h('div', {}, [h('h2', { text: 'Donation Progress Tracker' })]);
-    var cols = h('div', { class: 'cols' });
-    STATUSES.forEach(function (s) {
-      var list = state.requests.filter(function (r) { return r.status === s; });
-      var col = h('div', { class: 'col' }, [h('h3', { text: s + ' (' + list.length + ')' })]);
-      if (!list.length) col.appendChild(h('p', { class: 'small', text: 'Nothing here.' }));
-      list.forEach(function (r) {
-        var sel = h('select', { 'aria-label': 'Change status for ' + r.item, onchange: function () {
-          r.status = sel.value;
-          if (r.status === 'Fulfilled') r.received = r.qty;
-          else if (r.status === 'Needed') r.received = 0;
-          else if (r.received === 0 || r.received >= r.qty) r.received = Math.ceil(r.qty / 2);
-          save(); flash = 'Status updated.'; render();
-        } }, STATUSES.map(function (o) { return h('option', { selected: o === r.status, text: o }); }));
-        col.appendChild(h('div', { class: 'card' }, [h('strong', { text: r.item }), h('div', { class: 'small', text: r.nonprofit }), bar(r), h('label', { text: 'Update status' }), sel]));
-      });
-      cols.appendChild(col);
+  function stepIdea() {
+    var box = h('div', {}, [h('h2', { text: 'Step 2: Choose a fundraiser' })]);
+    IDEAS.forEach(function (p) {
+      var sel = state.idea === p.id;
+      box.appendChild(h('div', { class: 'card' + (sel ? ' sel' : '') }, [
+        h('h3', { text: p.name }), h('p', { text: p.text }), h('p', { class: 'small', text: 'Suggested materials: ' + p.mats }),
+        h('button', { type: 'button', class: sel ? 'green' : 'primary', 'aria-pressed': sel, text: sel ? 'Selected ✓' : 'Choose this idea',
+          onclick: function () { state.idea = p.id; save(); render(); } })
+      ]));
     });
-    root.appendChild(cols);
-    root.appendChild(h('div', { class: 'row' }, [h('button', { class: 'danger', text: 'Reset practice data', onclick: function () {
-      if (confirm('Reset everything back to the starting examples?')) { state = seed(); save(); flash = 'Practice data reset.'; goTo('needs'); }
-    } })]));
-    return root;
+    return box;
+  }
+  function stepPlan() {
+    var box = h('div', {}, [h('h2', { text: 'Step 3: Plan your fundraiser' }),
+      h('p', { class: 'small', text: 'Your answers save in this browser as you type. Use first names only.' })]);
+    var status = h('p', { class: 'msg', 'aria-live': 'polite' });
+    function upd() { status.textContent = planDone() ? 'Plan complete! You earned the Fundraiser Planner points.' : 'Fill in every box to complete your plan.'; }
+    PLAN_FIELDS.forEach(function (f) {
+      var id = 'plan-' + f[0];
+      var inp = f[2] === 'textarea' ? h('textarea', { id: id, rows: 3 }) : h('input', { id: id, type: f[2] });
+      inp.value = state.plan[f[0]] || '';
+      inp.addEventListener('input', function () { state.plan[f[0]] = inp.value; save(); upd(); });
+      box.appendChild(h('label', { for: id, text: f[1] })); box.appendChild(inp);
+    });
+    upd(); box.appendChild(status);
+    return box;
+  }
+  function stepRun() {
+    var box = h('div', {}, [h('h2', { text: 'Step 4: Run your fundraiser' })]);
+    box.appendChild(h('div', { class: 'card' }, [
+      h('h3', {}, ['Teacher approval: ', h('span', { class: 'pill ' + (state.approved ? 'approved' : 'pending'), text: state.approved ? 'Approved (sample)' : 'Approval pending' })]),
+      h('p', { text: state.approved ? 'This is a sample approval for the demo only.' : 'You must get teacher approval before you start your real fundraiser. The app never approves it for you.' })
+    ]));
+    var list = h('div', {});
+    TASKS.forEach(function (t, i) {
+      var id = 'task-' + i;
+      var locked = i === 0 || !state.approved;
+      var cb = h('input', { type: 'checkbox', id: id, disabled: locked });
+      cb.checked = i === 0 ? state.approved : (state.approved && taskDone(i));
+      cb.addEventListener('change', function () { if (canTick(i)) { state.tasks[i] = cb.checked; save(); render(); } });
+      var extra = i === 0 ? ' (done by your teacher, not by you)' : (!state.approved ? ' (locked until approved)' : '');
+      list.appendChild(h('label', { class: 'check', for: id }, [cb, h('span', { text: t + extra })]));
+    });
+    box.appendChild(list);
+    box.appendChild(h('div', { class: 'demo' }, [
+      h('strong', { text: 'Prototype demo only' }),
+      h('p', { class: 'small', text: 'There is no teacher account yet. To show how approval would look, this switch pretends a teacher approved sample information. In the real version only a teacher can do this.' }),
+      h('button', { type: 'button', text: state.approved ? 'Reset to approval pending' : 'Show a sample approval',
+        onclick: function () { state.approved = !state.approved; if (!state.approved) { state.tasks = []; } save(); render(); } })
+    ]));
+    return box;
+  }
+  function stepPoints() {
+    var p = points();
+    var box = h('div', {}, [h('h2', { text: 'Step 5: Earn points and badges' })]);
+    box.appendChild(h('div', { class: 'card' }, [h('div', { class: 'small', text: 'Your points' }), h('div', { class: 'points', text: p.total + ' / 120' }),
+      h('p', { class: 'small', text: 'Points and badges reward taking part and finishing steps. They are not based on how much money was raised.' })]));
+    var ul = h('ul', {});
+    p.items.forEach(function (i) { ul.appendChild(h('li', { text: (i[2] ? '✓ ' : '○ ') + i[0] + ' (+' + i[1] + ')' })); });
+    box.appendChild(ul);
+    var bd = h('div', { class: 'badges' });
+    badges().forEach(function (b) {
+      bd.appendChild(h('div', { class: 'badge' + (b[2] ? ' on' : '') }, [h('strong', { text: (b[2] ? '🏅 ' : '🔒 ') + b[0] }), h('div', { class: 'small', text: b[2] ? 'Earned!' : b[1] })]));
+    });
+    box.appendChild(bd);
+
+    box.appendChild(h('h2', { text: 'Final report' }));
+    if (!state.approved || !taskDone(5)) {
+      box.appendChild(h('p', { text: 'The report opens after the fundraiser is approved and you have checked "Hold the event" in Step 4.' }));
+      return box;
+    }
+    var pn = (find(PARTNERS, state.partner) || {}).name || '';
+    REPORT_FIELDS.forEach(function (f) {
+      var id = 'rep-' + f[0];
+      var inp = f[2] === 'textarea' ? h('textarea', { id: id, rows: 3 }) : h('input', { id: id, type: f[2], min: f[2] === 'number' ? 0 : false });
+      var def = f[0] === 'name' ? state.plan.name : f[0] === 'partner' ? pn : '';
+      inp.value = state.report[f[0]] != null ? state.report[f[0]] : (def || '');
+      inp.addEventListener('input', function () { state.report[f[0]] = inp.value; save(); });
+      box.appendChild(h('label', { for: id, text: f[1] })); box.appendChild(inp);
+    });
+    box.appendChild(h('div', { class: 'row' }, [h('button', { type: 'button', class: 'green', text: state.submitted ? 'Update report' : 'Submit report',
+      onclick: function () { state.submitted = true; REPORT_FIELDS.forEach(function (f) { var v = document.getElementById('rep-' + f[0]).value; state.report[f[0]] = v; }); save(); render(); } })]));
+    if (state.submitted) {
+      var r = state.report;
+      box.appendChild(h('div', { class: 'card sel' }, [
+        h('h3', { text: 'Impact summary' }),
+        h('p', { text: (r.name || 'Our fundraiser') + ' supported ' + (r.partner || 'our partner') + (r.date ? ' on ' + r.date : '') + '.' }),
+        h('p', { text: 'Reported: ' + (r.amount || 'nothing entered') + ', with ' + (r.people || '0') + ' participants.' }),
+        h('p', { text: 'What went well: ' + (r.well || '—') }),
+        h('p', { text: 'What we learned: ' + (r.learned || '—') }),
+        h('p', { class: 'small', text: 'These results were reported by the students. They have not been independently verified.' })
+      ]));
+    }
+    return box;
   }
 
   function render() {
-    var nav = document.getElementById('nav');
-    nav.textContent = '';
-    TABS.forEach(function (t) {
-      nav.appendChild(h('button', { 'aria-current': String(tab === t[0] || (tab === 'details' && t[0] === 'needs')), text: t[1], onclick: function () { flash = ''; goTo(t[0]); } }));
-    });
-    var view = document.getElementById('view');
-    view.textContent = '';
-    if (flash) view.appendChild(h('p', { class: 'msg', role: 'status', text: flash }));
-    var fn = { needs: viewNeeds, details: viewDetails, 'new': viewNew, offer: viewOffer, review: viewReview, progress: viewProgress }[tab];
-    view.appendChild(fn());
+    app.innerHTML = '';
+    app.setAttribute('tabindex', '-1');
+    if (!state.started) {
+      app.appendChild(h('div', {}, [
+        h('p', { text: 'Organize a fundraiser for Better Way Detroit or Detroit Rescue Mission Ministries. We will guide you through five steps, from picking a partner to earning points and badges.' }),
+        h('button', { type: 'button', class: 'big', text: 'RUN FUNDRAISER', onclick: function () { state.started = true; save(); render(); } })
+      ]));
+      return;
+    }
+    app.appendChild(stepper());
+    app.appendChild([stepPartner, stepIdea, stepPlan, stepRun, stepPoints][state.step]());
+    app.appendChild(nav());
+    app.appendChild(h('div', { class: 'row' }, [h('button', { type: 'button', text: 'Start over', onclick: function () {
+      if (confirm('Erase your saved progress in this browser and start over?')) { state = fresh(); save(); render(); } } })]));
   }
   render();
 })();
