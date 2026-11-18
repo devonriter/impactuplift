@@ -27,7 +27,7 @@ check_changes() {
     [ -n "$meta" ] || continue
     mode=$(echo "$meta" | cut -d' ' -f2)
     case "$path" in
-      .github/*|CLAUDE.md|firebase.json|.firebaserc|build.json|\"*)
+      .github/*|CLAUDE.md|LICENSE|firebase.json|.firebaserc|build.json|\"*)
         echo "Protected file: $path"; outside=1 ;;
       .*|*/.*) echo "Hidden file: $path"; outside=1 ;;
     esac

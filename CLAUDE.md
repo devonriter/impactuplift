@@ -18,7 +18,7 @@ The crew is building **one product: a fundraising web app** that helps students 
 
 **The whole site is the app.** It starts at `index.html` in the repo root, and there are no other projects or pages beside it. Issue titles may still start with `[Fundraiser]`; that is the only project. Organize the app's files however the request needs (new pages, a `css/` or `js/` folder), all inside the site. When you describe how to test, give the full live link, for example "open https://crew-solve-for-tomorrow.web.app/."
 
-You may change any site file. You may not change the files that build and deploy the site: anything under `.github/`, this file, `firebase.json`, `.firebaserc`, or `build.json`. A build that touches one of them is not published. If a request seems to need one of them, build everything else and say in your final comment what Mr. Riter would need to change.
+You may change any site file. You may not change the files that build and deploy the site: anything under `.github/`, this file, `LICENSE`, `firebase.json`, `.firebaserc`, or `build.json`. A build that touches one of them is not published. If a request seems to need one of them, build everything else and say in your final comment what Mr. Riter would need to change.
 
 Right now the app is plain HTML, CSS and JavaScript. When it needs more, pick the simplest approach that does the job, say why in your issue comment, and keep the whole site deployable on Firebase Hosting as one set of static files.
 
