@@ -96,7 +96,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh issue comment "$ISSUE_NUMBER" --body "Live now: https://crew-solve-for-tomorrow.web.app/ (Build #$ISSUE_NUMBER). Refresh and check the footer says Build #$ISSUE_NUMBER."
+          gh issue comment "$ISSUE_NUMBER" --body "Live now: https://impactuplift.org/ (Build #$ISSUE_NUMBER). Refresh and check the footer says Build #$ISSUE_NUMBER."
           gh issue close "$ISSUE_NUMBER"
 
       - name: Tell the team it did not publish
